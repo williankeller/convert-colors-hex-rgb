@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+body, input {
+    font: 300 18px/1.2 Tahoma, Geneva, sans-serif;
+    background: #3498db;
+}
+a {
+    text-decoration: none;
+    color: #222;
+}
+a:hover {
+    color: #111;
+}
+a:focus {
+    outline: none;
+}
+input {
+    display: block;
+    width: 335px;
+    font-size: 34px;
+    line-height: 44px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.4);
+    padding: 5px 0;
+}
+input:focus {
+    border-bottom-color: #000;
+    outline: none;
+}
+.pagina-titulo {
+    position: relative;
+    display: block;
+    margin: 50px auto;
+    font-size: 24px;
+    line-height: 1.2;
+    text-align: center;
+    color: #fff;
+}
+#area-conversao {
+    width: 340px;
+    height: 125px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -62.5px -170px;
+}
+#hex {
+    margin-bottom: 15px;
+}
+.pagina-escura {
+    color: #222!important;
+}
+.pagina-escura input {
+    color: #222!important;
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+.pagina-escura input:focus {
+    border-bottom-color: #000;
+}
+.pagina-clara .pagina-titulo {
+    color: #fff;
+}
+.pagina-clara .pagina-titulo:hover {
+    color: #ccc;
+}
+.pagina-clara input {
+    color: #fff!important;
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+.pagina-clara input:focus {
+    border-bottom-color: #fff;
+}
+.pagina-clara ::-webkit-input-placeholder {
+    color: #fff!important;
+}
+.pagina-clara :-moz-placeholder {
+    color: #fff!important;
+}
+.pagina-clara ::-moz-placeholder {
+    color: #fff!important;
+}
+.pagina-clara :-ms-input-placeholder {
+    color: #fff!important;
+}
+::-webkit-input-placeholder {
+    color: #222;
+}
+:-moz-placeholder {
+    color: #222;
+}
+::-moz-placeholder {
+    color: #222;
+}
+:-ms-input-placeholder {
+    color: #222;
+}
+@media only screen and (max-width: 400px) {
+    input {
+        width: 280px;
+        font-size: 28px;
+        line-height: 40px;
+    }
+    #area-conversao {
+        width: 280px;
+        margin-left: -140px;
+    }
+    .pagina-titulo {
+        top: 15px;
+        left: 15px;
+    }
+    .tweet {
+        bottom: 15px;
+        left: 15px;
+    }
+    .logo {
+        bottom: 15px;
+    }
+}
