@@ -15,4 +15,4 @@ $.converterCores("#3498db");
 $.converterCores("rgb(52,152,219)");
 ```
 
-O sistema é capaz de identificar o tipo e converter para p método contrário
+O sistema é capaz de identificar o tipo e converter para o método contrário.
