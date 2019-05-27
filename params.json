@@ -1,1 +1,6 @@
-{"name":"Converter-cores","tagline":"Converter cores Hex para RGB e RGB para HEX","body":"# [Converter Cores](http://projetos.butsource.com.br/converter-cores/)\r\nConverter cores Hex para RGB e RGB para HEX\r\n\r\n## Uso externo\r\nÉ possível usar o JavaScript de forma externa, sem passar pelo front-end.\r\n\r\n### Converter HEX para RGB\r\n\r\n```javascript\r\n$.converterCores(\"#3498db\");\r\n```\r\n\r\n### Converter RGB para HEX\r\n```javascript\r\n$.converterCores(\"rgb(52,152,219)\");\r\n```\r\n\r\nO sistema é capaz de identificar o tipo e converter para p método contrário\r\n\r\n### Contato\r\nGostou?\r\nwill_levinski@hotmail.com ou n3p0rb1t@gmail.com\r\n","google":"UA-61704059-4","note":"Don't delete this file! It's used internally to help with page regeneration."}
+{
+    "name":"convert-color",
+    "tagline":"Convert color from HEX to RGB online",
+    "body":"",
+    "google":"UA-61704059-4",
+    "note":"Don't delete this file! It's used internally to help with page regeneration."}
