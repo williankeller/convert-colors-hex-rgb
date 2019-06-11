@@ -1,48 +1,160 @@
 /**
- * convertColors
+ * @type {Function}
  */
-window.convertColors = function () {
+window.convertColors = (function() {
+
     /**
-     * @param e
+     * Validate if color content is numeric.
+     *
+     * @param value
      * @returns {boolean}
      */
-    function e(e) {
-        return !isNaN(parseFloat(e)) && isFinite(e);
+    function isNumeric(value) {
+        return !isNaN(parseFloat(value)) && isFinite(value);
     }
-    function t(e) {
-        return e.replace(/^\s+|\s+$/g, '');
+
+    /**
+     * @param value
+     * @returns {string}
+     */
+    function trim(value) {
+        return value.replace(/^\s+|\s+$/g, "");
     }
-    function n(n) {
-        return n = t(n), e(n) && n >= 0 && 255 >= n;
+
+    /**
+     * @param value
+     * @returns {boolean}
+     */
+    function isRgb(value) {
+        value = trim(value);
+        return isNumeric(value) && value >= 0 && value <= 255;
     }
-    function r(e) {
-        return /^[0-9a-f]{3}$|^[0-9a-f]{6}$/i.test(t(e));
+
+    /**
+     * @param value
+     * @returns {boolean}
+     */
+    function isHex(value) {
+        return (/^[0-9a-f]{3}$|^[0-9a-f]{6}$/i).test(
+            trim(value)
+        );
     }
-    function i(e) {
-        return e = parseInt(e, 10).toString(16), 1 === e.length ? '0' + e : e;
+
+    /**
+     * Parse RGB to HEX values.
+     *
+     * @param value
+     * @returns {string}
+     */
+    function rgbToHex(value) {
+        value = parseInt(value, 10).toString(16);
+        return value.length === 1 ? '0' + value : value;
     }
-    function s(e) {
-        return parseInt(e, 16).toString();
+
+    /**
+     * Parse Hex to RGB values.
+     *
+     * @param value
+     * @returns {string}
+     */
+    function hexToRgb(value) {
+        return parseInt(value, 16).toString();
     }
-    function o(t) {
-        return t = t.split(','), (3 === t.length || 4 === t.length) && n(t[0]) && n(t[1]) && n(t[2]) ? 4 !== t.length || e(t[3]) ? '#' + i(t[0]).toUpperCase() + i(t[1]).toUpperCase() + i(t[2]).toUpperCase() : null : null
-    }
-    function u(e) {
-        return r(e) ? (3 === e.length && (e = e.charAt(0) + e.charAt(0) + e.charAt(1) + e.charAt(1) + e.charAt(2) + e.charAt(2)), 'rgb(' + s(e.substr(0, 2)) + ',' + s(e.substr(2, 2)) + ',' + s(e.substr(4, 2)) + ')') : void 0
-    }
-    function a(e) {
-        return e.replace(/\s/g, '');
-    }
-    return function (e) {
-        if (!e)
+
+    /**
+     * Method responsible to handle the RGB value.
+     *
+     * @param value
+     * @returns {string|null}
+     */
+    function processRgb(value) {
+        value = value.split(',');
+
+        if ( (value.length === 3 || value.length === 4) && isRgb(value[0]) && isRgb(value[1]) && isRgb(value[2]) ) {
+            if (value.length === 4 && !isNumeric(value[3])) {
+                return null;
+            }
+            return '#'
+                + rgbToHex(value[0]).toUpperCase()
+                + rgbToHex(value[1]).toUpperCase()
+                + rgbToHex(value[2]).toUpperCase();
+        }
+        else {
             return null;
-        var n = null,
-            r = /^rgba?\((.*)\);?$/,
-            i = /^#/;
-        return e = t(e.toString()), 'transparent' === e || 'rgba(0,0,0,0)' === a(e) ? 'transparent' : r.test(e) ? o(e.match(r)[1]) : i.test(e) ? u(e.split('#').reverse()[0]) : (n = e.split(','), 1 === n.length ? u(e) : 3 === n.length || 4 === n.length ? o(e) : void 0)
-    };
-}(), jQuery && jQuery.extend({
-    convertColors: function (e) {
-        return window.convertColors(e);
+        }
     }
-});
+
+    /**
+     * Method responsible to process the HEX value.
+     *
+     * @param value
+     * @returns {string}
+     */
+    function processHex(value) {
+        if (isHex(value)) {
+            if (value.length === 3) {
+                value = value.charAt(0)
+                    + value.charAt(0)
+                    + value.charAt(1)
+                    + value.charAt(1)
+                    + value.charAt(2)
+                    + value.charAt(2);
+            }
+            return 'rgb('
+                + hexToRgb(value.substr(0,2))
+                + ',' +
+                hexToRgb(value.substr(2,2))
+                + ',' +
+                hexToRgb(value.substr(4,2))
+                + ')';
+        }
+    }
+
+    /**
+     * @param value
+     * @returns {string}
+     */
+    function removeWhitespace(value) {
+        return value.replace(/\s/g, '');
+    }
+
+    return function(value) {
+        if (!value) {
+            return null;
+        }
+
+        var code = null,
+            rgbRegex = /^rgba?\((.*)\);?$/,
+            hexRegex = /^#/;
+
+        value = trim(value.toString());
+
+        if (value === 'transparent' || removeWhitespace(value) === 'rgba(0,0,0,0)') {
+            return 'transparent';
+        }
+        else if (rgbRegex.test(value)) {
+            return processRgb(value.match(rgbRegex)[1]);
+        }
+        else if (hexRegex.test(value)) {
+            return processHex(value.split('#').reverse()[0]);
+        }
+        else {
+            code = value.split(',');
+
+            if (code.length === 1) {
+                return processHex(value);
+            }
+            else if (code.length === 3 || code.length === 4) {
+                return processRgb(value);ß
+            }
+        }
+    };
+})();
+
+if (jQuery) {
+    jQuery.extend({
+        convertColors: function(event) {
+            return window.convertColors(event);
+        }
+    });
+}
