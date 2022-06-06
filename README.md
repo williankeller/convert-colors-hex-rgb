@@ -27,4 +27,4 @@ Want to contribute to this extension? The quickest way is to open a [pull reques
 ### Support
 
 If you encounter any problems or bugs, please open an issue on [GitHub](https://github.com/williankeller/convert-colors-hex-rgb/issues).
-Need help setting up or want to customize this extension to meet your business needs? Please email willianlkeller@outlook.com and if we like your idea we will add this feature for free or at a discounted rate.
+Need help setting up or want to customize this extension to meet your business needs?
